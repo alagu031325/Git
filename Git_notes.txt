@@ -1,0 +1,47 @@
+Basic Git commands: - Install git 
+-------------------
+
+git init - To initialize a new git repository - creates .git folder
+
+git commit - each commit should be atomic that is each commit should have single set of change (solving a single problem) - maintains clean history of the project and easy to revert specific set of changes if not needed
+
+git add <filename> - preserves the state of the file in the when it was staged even before we commit a file where entire copy of the file is saved in the local  git repository - we can restore a file from staging area, if accidentally modified
+
+git restore --staged <file-name> --> to bring the staged file back to modified state in the working area (to restore back the changes in the file)
+
+git rm (--cached/-f) <filename> - to remove a tracked file from git repo, force deletes the file, whereelse cached retains the file in the directory(in untracked stage)
+
+To permanently ignore the file , add the filename to the "gitignore" file. 
+echo "notes.txt" >> .gitignore
+
+Visualize commits with git log -> git log --oneline
+
+Git Branches
+------------
+
+Keep the project versioned using branches (branches are pointers to certain commit, initially both branches can point to the same commit)
+
+git checkout -b <name of the branch> --> to create and switch to an existing branch
+git branch <branch name> --> create a new branch
+git checkout <branch name> --> switch to an existing branch
+git branch --> to see list of all branches
+git branch -d <branch name> - to delete a branch
+
+HEAD - points to the last commit in the existing branch - HEAD moves with us when we switch branches
+
+Git Merge:
+----------
+first checkout the branch into which the code has to be merged then merge using
+
+git merge <git branch name to be merged into existing branch>
+
+fast-forward merge --> doesnt create a new commit instead merges the commits from the branch that we are merging into the current branch - this works if master branch or branch to which we are merging doesnt contain any additional commits
+
+no-fast-forward --> we commit the change on current branch which is not there in merging branch then git creates new merging commit on the active branch - the parent commit points to both the active branch and the branch that we want to merge
+
+
+
+
+
+
+

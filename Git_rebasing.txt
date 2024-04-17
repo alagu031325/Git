@@ -1,0 +1,142 @@
+Remote repository:
+-----------------
+Can be initialized in any one of the platforms such as GitHub, GitLab and BitBucket. We get a connection string - url, to get to know the remote repository location
+
+Add remote repository to the local project - with 
+
+git remote add origin <connection string> --> add remote repo and give it alias origin --> without having to memorize the entire connection string
+
+git remote -v --> to list all the remote repositories
+
+Pushing data from local repo to remote repo:
+--------------------------------------------
+
+git push origin <current-branch> --> alias origin points to remote git repo - pushes newly committed files to the remote repo
+
+Cloning:
+--------
+New team member can clone the repository to get all the data on to the local machine
+
+git clone <ssh link> - It creates folder locally with the same name as remote repo
+
+Push latest code to github branch:
+----------------------------------
+git push origin <branch-name> --> the master branch remains one commit behind this branch
+
+Create a Pull Request (PR) to merge the changes to master branch - then Merge the pull request if no conflict with the master branch
+
+Fetching and Pulling:
+----------------------
+local repo arent aware of the changes that go into the remote repo
+
+git fetch origin master - update the origin master branch in our local repo then update the local master branch to point to the latest changes in the origin master
+
+git merge origin/master 
+
+git pull origin master --> is actually two commands in one, git fetch and git merge - we can fetch and merge remote changes directly into local master branch
+
+Fork:
+-----
+When we fork the git repo we are creating our own copy of the original project - we can add our own features and send a Pull request to the owner of git repo - once PR is approved by the maintainers of the open source project they can merge changes into the original repository
+
+
+Rebasing:
+---------
+
+//1st way
+git merge master - to merge the master branch commit into our own branch to keep up to date with changes - when we merge branches the unique commit hashes wont be modified, maintaining the history of git commits
+
+//2nd way
+Rebasing: putting one branch on top of the other one
+---------
+git rebase master - moves the current branch on top of master branch, so that the current branch has all latest changes went into master branch - when we rebase we are copying commit from one branch to another , so the commit hash is updated - modifying the git history
+
+We can change the history of git branch with an interactive rebase - git rebase -i HEAD~4 --> says that we want to interactively rebase last 4 commits
+
+squash to meld 3 commit into previous commit - change command and exit - rebased 3 extra commits and created a new commit that contains all 4 commits combined
+
+Cherry picking: one branch wants just one or two changes that are done to diff branch
+---------------
+
+Creates copy of that commit to our own branch - git cherry-pick <commit hash> that needs to be copied on to the current branch
+
+Resetting and reverting:
+------------------------
+We have commited certain changes that we dont want to commit - to undo them
+
+1st option: revert the commit
+git revert <commit hash> --> reverts all changes made on that commit
+
+revert is useful to undo changes and keep it in git history 
+
+Reset command :
+--------------
+git reset --soft HEAD~1 --> to retain changes that was made in that commit - reset flag also receives the same amount of commit that we want to reset - now the current branch points back to the previous commit with the changes accessible made by the latest commit 
+
+git reset --hard HEAD~1 --> to lose all changes that was made in that commit - commit will not save the changes made by the latest commit - changes lost
+
+Stashing:
+---------
+
+git stash - to stash all changes in the working area - move to stash area temporarily, that needs to be worked on and not to be committed, we can keep on pushing files into stash and it will keep on piling up all files
+
+git stash pop - can get changes back into the working area
+
+git stash list - to list all files currently pushed to stash 
+
+git stash show <stash-id> - to view the contents of certain stash 
+
+git stash pop <stash-id> - to pop a specific stash instead of the last one that was added on to it
+
+Reflog:
+-------
+git reflog -- shows all actions taken on our repo includes merges,resets and reverts, commits
+
+If we made any mistake we can undo using setting HEAD based on reflog info - set back to the commit that was reverted
+
+git reset --hard <reflog-id> - repo came to prev state
+
+git log only shows info about the commits but not about the state of the repository, like git reflog does.
+
+Understanding GIT:
+-------------------
+Porcelain commands - simple cmds for users such as git add, status, commit, stash
+
+Plumbing commands - used to access the internals of the git - git hash-object, git ls-files, git rev-parse, git ls-remote
+
+git hash-object <name of the file> - creates a hash value and first two characters of this hash are used as a key
+
+git cat-file -p bea8d7 - print the contents of the file starting with first couple of characters with this hash 
+
+Git is not but a key value pair- contents of files are hashed using SHA 1 algorithm then the hash is used as a key name for the folder where the files are stored
+
+Git object folder contents could be either a commit, tree or a blob
+
+tree - folder on the file system that is assosiated with the git repository 
+
+blob - just a piece of data 
+
+Every commit points to the parent commit, and it is just a reference to more trees and blob
+
+
+Git stash:
+---------
+git stash save "message"
+
+git stash apply 
+
+git stash save "message"
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
